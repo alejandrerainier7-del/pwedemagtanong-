@@ -9,7 +9,6 @@
 
 		:root {
 			--rose: #7c3aed;
-			--deep-rose: #5b21b6;
 			--ink: #241b35;
 			--cream: #faf7ff;
 			--peach: #e9ddff;
@@ -64,7 +63,8 @@
 		.sparkle.three { top: 22%; right: 27%; font-size: .9rem; animation-delay: 2s; }
 
 		.card {
-			width: min(90vw, 520px);
+			width: 90%;
+			max-width: 360px;
 			padding: 3.3rem 2.3rem 2.7rem;
 			border: 1px solid rgba(255, 255, 255, .8);
 			border-radius: 28px;
@@ -134,10 +134,13 @@
 		button {
 			min-width: 142px;
 			padding: .9rem 1.25rem;
-			border: 2px solid var(--deep-rose);
+			border: 3px solid var(--deep-rose);
 			border-radius: 999px;
 			color: var(--deep-rose);
 			background: #ffffff;
+			outline: 1px solid rgba(91, 33, 182, .18);
+			outline-offset: 1px;
+			box-shadow: 0 0 0 2px rgba(255, 255, 255, .95), 0 6px 16px rgba(91, 33, 182, .2);
 			cursor: pointer;
 			font: inherit;
 			font-weight: 700;
@@ -153,7 +156,7 @@
 		.yes {
 			color: white;
 			background: var(--rose);
-			box-shadow: 0 8px 18px rgba(91, 33, 182, .24);
+			box-shadow: 0 0 0 2px rgba(255, 255, 255, .95), 0 8px 18px rgba(91, 33, 182, .3);
 		}
 
 		.response {
@@ -180,13 +183,12 @@
 		}
 
 		@keyframes arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-		@keyframes pulse { 50% { transform: scale(1.08); } }
+		@keyframes pulse { 50% { opacity: .86; } }
 		@keyframes float { 50% { transform: translateY(-10px) rotate(12deg); } }
 
 		@media (max-width: 600px) {
 			body { padding: .75rem; }
 			.card {
-				width: 100%;
 				padding: 2.4rem 1.1rem 2rem;
 				border-radius: 22px;
 			}
@@ -281,7 +283,6 @@
 			}
 
 			button.classList.add('is-dodging');
-			button.style.transform = `scale(${Math.max(0.05, 1 - clickCount / 30)})`;
 			const margin = 16;
 			const maxLeft = window.innerWidth - button.offsetWidth - margin;
 			const maxTop = window.innerHeight - button.offsetHeight - margin;
