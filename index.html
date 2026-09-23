@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fil">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Alam Mo Ba?</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap');
+
+		:root {
+			--rose: #7c3aed;
+			--deep-rose: #5b21b6;
+			--ink: #241b35;
+			--cream: #faf7ff;
+			--peach: #e9ddff;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			min-height: 100svh;
+			margin: 0;
+			padding: 1rem;
+			display: grid;
+			place-items: center;
+			overflow-x: hidden;
+			overflow-y: auto;
+			color: var(--ink);
+			background: var(--cream);
+			font-family: 'DM Sans', sans-serif;
+		}
+
+		body::before, body::after {
+			position: fixed;
+			z-index: -1;
+			width: 42vw;
+			height: 42vw;
+			border-radius: 50%;
+			content: '';
+			filter: blur(4px);
+		}
+
+		body::before {
+			top: -18vw;
+			left: -12vw;
+			background: #ddd0ff;
+		}
+
+		body::after {
+			right: -14vw;
+			bottom: -20vw;
+			background: #c4b5fd;
+		}
+
+		.sparkle {
+			position: fixed;
+			color: #a78bfa;
+			font-size: 1.4rem;
+			animation: float 4s ease-in-out infinite;
+		}
+
+		.sparkle.one { top: 15%; left: 15%; }
+		.sparkle.two { right: 16%; bottom: 19%; animation-delay: 1.2s; }
+		.sparkle.three { top: 22%; right: 27%; font-size: .9rem; animation-delay: 2s; }
+
+		.card {
+			width: min(90vw, 520px);
+			padding: 3.3rem 2.3rem 2.7rem;
+			border: 1px solid rgba(255, 255, 255, .8);
+			border-radius: 28px;
+			background: rgba(255, 255, 255, .72);
+			box-shadow: 0 24px 70px rgba(91, 33, 182, .18);
+			text-align: center;
+			backdrop-filter: blur(16px);
+			animation: arrive .7s ease-out both;
+		}
+
+		.heart {
+			display: grid;
+			width: 74px;
+			height: 74px;
+			margin: 0 auto 1.7rem;
+			place-items: center;
+			border-radius: 50%;
+			color: white;
+			background: var(--rose);
+			box-shadow: 0 10px 24px rgba(124, 58, 237, .3);
+			font-size: 2rem;
+			animation: pulse 2.2s ease-in-out infinite;
+		}
+
+		.eyebrow {
+			margin: 0 0 .7rem;
+			color: var(--deep-rose);
+			font-size: .75rem;
+			font-weight: 700;
+			letter-spacing: .18em;
+			text-transform: uppercase;
+		}
+
+		h1 {
+			max-width: 400px;
+			margin: 0 auto 1rem;
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: clamp(2.2rem, 8vw, 3.9rem);
+			line-height: 1.04;
+			letter-spacing: 0;
+		}
+
+		.note {
+			max-width: 330px;
+			margin: 0 auto 2rem;
+			color: #765b68;
+			line-height: 1.6;
+		}
+
+		.actions {
+			display: flex;
+			justify-content: center;
+			gap: .75rem;
+		}
+
+		.no-button {
+			position: relative;
+			z-index: 2;
+		}
+
+		.no-button.is-dodging {
+			position: fixed;
+			transform-origin: top left;
+			transition: left .25s ease, top .25s ease, transform .25s ease;
+		}
+
+		button {
+			min-width: 142px;
+			padding: .9rem 1.25rem;
+			border: 2px solid var(--deep-rose);
+			border-radius: 999px;
+			color: var(--deep-rose);
+			background: #ffffff;
+			cursor: pointer;
+			font: inherit;
+			font-weight: 700;
+			transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+		}
+
+		button:hover, button:focus-visible {
+			transform: translateY(-3px);
+			box-shadow: 0 8px 18px rgba(91, 33, 182, .2);
+			outline: none;
+		}
+
+		.yes {
+			color: white;
+			background: var(--rose);
+			box-shadow: 0 8px 18px rgba(91, 33, 182, .24);
+		}
+
+		.response {
+			min-height: 1.7em;
+			margin: 1.5rem 0 0;
+			color: var(--deep-rose);
+			font-weight: 700;
+		}
+
+		.small-answer {
+			margin: -.35rem 0 1.35rem;
+			color: var(--deep-rose);
+			font-size: .84rem;
+			font-weight: 500;
+			letter-spacing: .08em;
+			text-transform: lowercase;
+		}
+
+		.credit {
+			margin: 1.4rem 0 0;
+			color: #7c6b92;
+			font-size: .68rem;
+			letter-spacing: .08em;
+		}
+
+		@keyframes arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes pulse { 50% { transform: scale(1.08); } }
+		@keyframes float { 50% { transform: translateY(-10px) rotate(12deg); } }
+
+		@media (max-width: 600px) {
+			body { padding: .75rem; }
+			.card {
+				width: 100%;
+				padding: 2.4rem 1.1rem 2rem;
+				border-radius: 22px;
+			}
+			.heart {
+				width: 64px;
+				height: 64px;
+				margin-bottom: 1.35rem;
+			}
+			h1 {
+				font-size: clamp(2rem, 10vw, 3rem);
+			}
+			.note {
+				max-width: 100%;
+				font-size: .95rem;
+			}
+			.actions { flex-direction: column; align-items: stretch; }
+			button {
+				width: 100%;
+				min-width: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<span class="sparkle one" aria-hidden="true">✦</span>
+	<span class="sparkle two" aria-hidden="true">✧</span>
+	<span class="sparkle three" aria-hidden="true">✦</span>
+
+	<main class="card">
+		<div class="heart" aria-hidden="true">★</div>
+		<p class="eyebrow">pwede mag tanong?</p>
+		<h1>Alam mo ba?</h1>
+		<div class="actions">
+			<button class="yes" type="button" onclick="nextPage()">OO</button>
+			<button type="button" onclick="nextPage()">HINDI</button>
+			<button type="button" onclick="nextPage()">never grow old?</button>
+		</div>
+	</main>
+
+	<script>
+		function nextPage() {
+			const card = document.querySelector('.card');
+			card.innerHTML = `
+				<div class="heart" aria-hidden="true">★</div>
+				<h1>kung hindi mo pa alam, gusto mo ba malaman?</h1>
+				<div class="actions">
+					<button class="yes" type="button" onclick="finalPage()">bahala ka</button>
+				</div>
+			`;
+		}
+
+		function finalPage() {
+			const card = document.querySelector('.card');
+			card.innerHTML = `
+				<div class="heart" aria-hidden="true">★</div>
+				<p class="eyebrow">nakakahiya pero</p>
+				<h1>Gusto kita, gusto mo rin ba ’ko?</h1>
+				<p class="small-answer">honest answer haaa</p>
+				<div class="actions">
+					<button class="yes" type="button" onclick="fourthPage()">YES</button>
+					<button class="no-button" type="button" onclick="dodgeNo(this)">NO</button>
+				</div>
+			`;
+		}
+
+		function dodgeNo(button) {
+			const clickCount = Number(button.dataset.clicks || 0) + 1;
+			button.dataset.clicks = clickCount;
+
+			if (clickCount >= 30) {
+				button.style.display = 'none';
+				return;
+			}
+
+			button.classList.add('is-dodging');
+			button.style.transform = `scale(${Math.max(0.05, 1 - clickCount / 30)})`;
+			const margin = 16;
+			const maxLeft = window.innerWidth - button.offsetWidth - margin;
+			const maxTop = window.innerHeight - button.offsetHeight - margin;
+			button.style.left = `${Math.max(margin, Math.random() * maxLeft)}px`;
+			button.style.top = `${Math.max(margin, Math.random() * maxTop)}px`;
+		}
+
+		function fourthPage() {
+			const card = document.querySelector('.card');
+
+			card.innerHTML = `
+				<div class="heart" aria-hidden="true">♥ ♥ ♥</div>
+				<h1>yes or no bahala ka jan</h1>
+				<p class="note">Pero ang ganda mo kasee ehh. Yung mga ngiti mo, yung mga mata mo, hayssss. Ang bait mo pa, matalino pa BWAHAHAHAHAHAHA pa chismis nga ng sagot mo. ★</p>
+				<p class="credit">created by Rainier</p>
+			`;
+		}
+	</script>
+</body>
+</html>
